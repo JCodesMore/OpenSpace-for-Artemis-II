@@ -26,14 +26,17 @@
 -- Sandbox note: io, os, package are removed. Use openspace.readFile().
 
 -- ── Global state (initialized once, persists across frame re-executions) ──────
+-- NOTE: OpenSpace enables Lua strict mode (ghoul StrictState::Yes), which forbids
+-- reading undeclared globals. Use rawget(_G, name) to check existence without
+-- triggering the __index metamethod error "variable 'X' is not declared".
 
-_data = _data or {}               -- cached array of data points from file
-_last_wall = _last_wall or 0      -- wallTime (ms) when file was last read
-_last_pos = _last_pos or {0, 0, 0}  -- last successfully interpolated position
+_data = rawget(_G, "_data") or {}               -- cached array of data points from file
+_last_wall = rawget(_G, "_last_wall") or 0      -- wallTime (ms) when file was last read
+_last_pos = rawget(_G, "_last_pos") or {0, 0, 0}  -- last successfully interpolated position
 
 -- Path to the data file written by the Python poller.
 -- Change this path to match your local poller output location.
-_DATA_PATH = _DATA_PATH or "C:/Users/jmd50/Documents/Main/Projects/AI/artemis-2-track/poller/artemis2_live.dat"
+_DATA_PATH = rawget(_G, "_DATA_PATH") or "C:/Users/jmd50/Documents/Main/Projects/AI/artemis-2-track/poller/artemis2_live.dat"
 
 -- Re-read interval: reload data file at most every 3 wall-clock seconds.
 local INTERVAL_MS = 3000
