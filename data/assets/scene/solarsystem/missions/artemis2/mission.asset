@@ -1,0 +1,61 @@
+local Mission = {
+  Identifier = "Artemis2",
+  Name = "Artemis 2",
+  TimeRange = { Start = "2026 APR 01 22:24:00", End = "2026 APR 10 21:00:00" },
+  Image = "https://data.openspaceproject.com/missions/artemis/em1_patch_final.png",
+  Description = "The Artemis 2 mission is the first crewed flight of NASA's Orion spacecraft, sending four astronauts on a free-return trajectory around the Moon. Crew: Reid Wiseman (CDR), Victor Glover (Pilot), Christina Koch (MS1), Jeremy Hansen (MS2/CSA).",
+  Milestones = {
+    {
+      Name = "Mission launch",
+      Date = "2026 APR 01 22:24:00",
+      Description = "Artemis 2 launches from KSC LC-39B on SLS Block 1 with crew."
+    },
+    {
+      Name = "ICPS separation",
+      Date = "2026 APR 01 22:32:30",
+      Description = "Interim Cryogenic Propulsion Stage separates after TLI burn."
+    },
+    {
+      Name = "Trans-lunar injection",
+      Date = "2026 APR 02 02:00:00",
+      Description = "Orion begins its transit to the Moon."
+    },
+    {
+      Name = "Lunar close approach",
+      Date = "2026 APR 07 12:00:00",
+      Description = "Orion reaches closest approach to the lunar far side, approximately 4,047 miles above the surface."
+    },
+    {
+      Name = "Splashdown",
+      Date = "2026 APR 10 18:00:00",
+      Description = "Orion splashes down in the Pacific Ocean off San Diego."
+    }
+  },
+  Phases = {
+    {
+      Name = "Launch and ascent",
+      TimeRange = { Start = "2026 APR 01 22:24:00", End = "2026 APR 02 02:00:00" }
+    },
+    {
+      Name = "Outbound transit",
+      TimeRange = { Start = "2026 APR 02 02:00:00", End = "2026 APR 07 00:00:00" }
+    },
+    {
+      Name = "Lunar flyby",
+      TimeRange = { Start = "2026 APR 07 00:00:00", End = "2026 APR 08 00:00:00" }
+    },
+    {
+      Name = "Return transit",
+      TimeRange = { Start = "2026 APR 08 00:00:00", End = "2026 APR 10 18:00:00" }
+    }
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.loadMission(Mission)
+end)
+
+asset.onDeinitialize(function()
+  openspace.unloadMission(Mission)
+end)

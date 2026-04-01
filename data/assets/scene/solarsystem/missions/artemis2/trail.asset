@@ -1,0 +1,69 @@
+local earthTransforms = asset.require("scene/solarsystem/planets/earth/transforms")
+local moon = asset.require("scene/solarsystem/planets/earth/moon/moon")
+
+local Artemis2EarthTrail = {
+  Identifier = "Artemis2EarthTrail",
+  Parent = earthTransforms.EarthCenter.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = asset.resource("artemis2.hrz")
+    },
+    Color = { 0.2, 0.78, 0.635 },
+    Fade = 7.0,
+    StartTime = "2026 APR 02 02:00:00",
+    EndTime = "2026 APR 10 23:54:00",
+    SampleInterval = 600
+  },
+  GUI = {
+    Name = "Artemis-2 Earth Trail",
+    Path = "/Solar System/Missions/Artemis/Trails",
+    Focusable = false,
+    Description = "Artemis-2 trail relative to Earth"
+  }
+}
+
+local Artemis2MoonTrail = {
+  Identifier = "Artemis2MoonTrail",
+  Parent = moon.Moon.Identifier,
+  Renderable = {
+    Type = "RenderableTrailTrajectory",
+    Translation = {
+      Type = "HorizonsTranslation",
+      HorizonsTextFile = asset.resource("artemis2.hrz")
+    },
+    Color = { 0.78, 0.43, 0.20 },
+    Fade = 7.0,
+    StartTime = "2026 APR 02 02:00:00",
+    EndTime = "2026 APR 10 23:54:00",
+    SampleInterval = 600
+  },
+  GUI = {
+    Name = "Artemis-2 Moon Trail",
+    Path = "/Solar System/Missions/Artemis/Trails",
+    Focusable = false,
+    Description = "Artemis-2 trail relative to the Moon"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Artemis2EarthTrail)
+  openspace.addSceneGraphNode(Artemis2MoonTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Artemis2MoonTrail)
+  openspace.removeSceneGraphNode(Artemis2EarthTrail)
+end)
+
+asset.export(Artemis2EarthTrail)
+asset.export(Artemis2MoonTrail)
+
+asset.meta = {
+  Name = "Artemis-2 Trails",
+  Description = "Trail of Artemis-2 in respect to Earth and the Moon",
+  Author = "Custom",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}
