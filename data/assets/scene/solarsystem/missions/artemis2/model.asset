@@ -14,12 +14,8 @@ local Artemis2Model = {
   ApproachFactor = 2700,
   Transform = {
     Rotation = {
-      Type = "FixedRotation",
-      Attached = "Artemis2Model",
-      XAxis = { 1.0, 0.0, 0.0 },
-      XAxisOrthogonal = true,
-      YAxis = sun.SunCenter.Identifier,
-      YAxisInvert = true
+      Type = "LuaRotation",
+      Script = asset.resource("artemis2_orient.lua")
     }
   },
   Renderable = {
@@ -49,7 +45,7 @@ asset.export(Artemis2Model)
 
 asset.meta = {
   Name = "Artemis-2 Model",
-  Description = "Orion capsule model for the Artemis-2 mission",
+  Description = "Orion capsule model for the Artemis-2 mission with live LuaRotation orientation",
   Author = "Custom",
   URL = "http://openspaceproject.com",
   License = "MIT license"
