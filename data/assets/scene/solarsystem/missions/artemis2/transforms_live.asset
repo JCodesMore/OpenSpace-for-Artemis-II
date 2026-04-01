@@ -1,0 +1,49 @@
+-- Live position node for Artemis 2 using LuaTranslation.
+-- Reads position data from Python poller's output file via artemis2_live.lua.
+--
+-- Parent is EarthInertial (J2000 frame) — NOT EarthCenter.
+-- The poller writes positions in J2000/ICRF meters. EarthInertial applies the
+-- J2000->Galactic SPICE rotation that OpenSpace's scene graph expects.
+-- (EarthCenter uses the HorizonsTranslation which outputs GALACTIC frame directly;
+-- using EarthInertial there would double-rotate. LuaTranslation outputs J2000/ICRF,
+-- so EarthInertial is the correct parent.)
+--
+-- The static HorizonsTranslation node (Artemis2Position under EarthCenter) in
+-- transforms.asset is preserved unchanged as a fallback (R4.3).
+
+local earthTransforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+local Artemis2LivePosition = {
+  Identifier = "Artemis2LivePosition",
+  Parent = earthTransforms.EarthInertial.Identifier,
+  Transform = {
+    Translation = {
+      Type = "LuaTranslation",
+      Script = asset.resource("artemis2_live.lua")
+    }
+  },
+  GUI = {
+    Name = "Artemis-2 Live Position",
+    Path = "/Solar System/Missions/Artemis",
+    Focusable = false,
+    Hidden = true
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Artemis2LivePosition)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Artemis2LivePosition)
+end)
+
+asset.export(Artemis2LivePosition)
+
+asset.meta = {
+  Name = "Artemis-2 Live Transforms",
+  Description = "Live position node using LuaTranslation for real-time spacecraft tracking",
+  Author = "Custom",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}
