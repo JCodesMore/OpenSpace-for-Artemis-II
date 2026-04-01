@@ -1,5 +1,6 @@
 asset.require("./trail")
 asset.require("./model")
 asset.require("./actions")
+asset.require("./camera")
 asset.require("./mission")
 asset.require("./transforms_live")
