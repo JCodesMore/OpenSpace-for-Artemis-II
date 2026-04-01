@@ -1,0 +1,76 @@
+local OverviewCam = {
+  Identifier = "os.artemis2.OverviewCam",
+  Name = "Artemis-2 Overview (Earth-Moon system)",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "Earth")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+    openspace.pathnavigation.flyTo("Earth", false, 3)
+  ]],
+  Documentation = "Overview of Earth-Moon system with Artemis-2 trajectory visible",
+  GuiPath = "/Artemis2/Camera",
+  IsLocal = false
+}
+
+local FollowCam = {
+  Identifier = "os.artemis2.FollowCam",
+  Name = "Follow Artemis-2",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "Artemis2Model")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+    openspace.pathnavigation.flyTo("Artemis2Model", false, 2)
+  ]],
+  Documentation = "Anchor the camera to the Artemis-2 spacecraft",
+  GuiPath = "/Artemis2/Camera",
+  IsLocal = false
+}
+
+local CloseUpCam = {
+  Identifier = "os.artemis2.CloseUpCam",
+  Name = "Artemis-2 Close-up (cockpit)",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "Artemis2Model")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "Earth")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+    openspace.navigation.setNavigationState({
+      Anchor = "Artemis2Model",
+      Aim = "Earth",
+      Position = { 364.907409, -65.898746, 361.510673 },
+      ReferenceFrame = "Root",
+      Up = { -0.128611, 0.94459, 0.302006 }
+    })
+  ]],
+  Documentation = "Close-up view anchored to capsule, aimed at Earth",
+  GuiPath = "/Artemis2/Camera",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(OverviewCam)
+  openspace.action.registerAction(FollowCam)
+  openspace.action.registerAction(CloseUpCam)
+
+  openspace.bindKey("1", OverviewCam.Identifier)
+  openspace.bindKey("2", FollowCam.Identifier)
+  openspace.bindKey("3", CloseUpCam.Identifier)
+end)
+
+asset.onDeinitialize(function()
+  openspace.clearKey("3")
+  openspace.clearKey("2")
+  openspace.clearKey("1")
+  openspace.action.removeAction(CloseUpCam)
+  openspace.action.removeAction(FollowCam)
+  openspace.action.removeAction(OverviewCam)
+end)
+
+
+asset.meta = {
+  Name = "Camera Presets - Artemis 2",
+  Description = "Camera presets for orbital overview, follow-cam, and close-up cockpit views. Keys: 1=Overview, 2=Follow, 3=Close-up",
+  Author = "Custom",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}
