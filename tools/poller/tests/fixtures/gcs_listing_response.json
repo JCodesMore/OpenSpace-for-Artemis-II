@@ -1,0 +1,21 @@
+{
+  "kind": "storage#objects",
+  "items": [
+    {
+      "name": "October/1/October_108_1.txt",
+      "bucket": "p-2-cen1",
+      "size": "21234",
+      "timeCreated": "2026-02-15T10:30:00.000Z",
+      "updated": "2026-02-15T10:30:00.000Z",
+      "mediaLink": "https://storage.googleapis.com/download/storage/v1/b/p-2-cen1/o/October%2F1%2FOctober_108_1.txt?alt=media"
+    },
+    {
+      "name": "October/1/",
+      "bucket": "p-2-cen1",
+      "size": "0",
+      "timeCreated": "2026-01-01T00:00:00.000Z",
+      "updated": "2026-01-01T00:00:00.000Z",
+      "mediaLink": "https://storage.googleapis.com/download/storage/v1/b/p-2-cen1/o/October%2F1%2F?alt=media"
+    }
+  ]
+}
