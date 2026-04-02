@@ -1,6 +1,8 @@
 asset.require("./trail")
+asset.require("./trail_live")
 asset.require("./model")
 asset.require("./actions")
 asset.require("./camera")
 asset.require("./mission")
 asset.require("./transforms_live")
+asset.require("./poller_launcher")

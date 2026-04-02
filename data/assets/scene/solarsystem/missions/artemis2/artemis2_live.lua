@@ -36,7 +36,7 @@ _last_pos = rawget(_G, "_last_pos") or {0, 0, 0}  -- last successfully interpola
 
 -- Path to the data file written by the Python poller.
 -- Change this path to match your local poller output location.
-_DATA_PATH = rawget(_G, "_DATA_PATH") or "C:/Users/jmd50/Documents/Main/Projects/AI/artemis-2-track/poller/artemis2_live.dat"
+_DATA_PATH = rawget(_G, "_DATA_PATH") or openspace.absPath("${BASE}/tools/poller/artemis2_live.dat")
 
 -- Re-read interval: reload data file at most every 3 wall-clock seconds.
 local INTERVAL_MS = 3000

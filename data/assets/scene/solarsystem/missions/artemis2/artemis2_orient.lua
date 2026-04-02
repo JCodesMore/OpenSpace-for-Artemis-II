@@ -31,7 +31,7 @@ _orient_last_wall = rawget(_G, "_orient_last_wall") or 0  -- wallTime (ms) of la
 
 -- Path to the data file written by the Python poller (same file as position script).
 _ORIENT_DATA_PATH = rawget(_G, "_ORIENT_DATA_PATH")
-    or "C:/Users/jmd50/Documents/Main/Projects/AI/artemis-2-track/poller/artemis2_live.dat"
+    or openspace.absPath("${BASE}/tools/poller/artemis2_live.dat")
 
 -- Re-read interval: reload data file at most every 3 wall-clock seconds.
 local INTERVAL_MS = 3000

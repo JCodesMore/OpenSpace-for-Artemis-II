@@ -1,0 +1,58 @@
+-- poller_launcher.asset -- Auto-start/stop the Python data poller with OpenSpace.
+--
+-- Requires SandboxedLua = false in openspace.cfg to allow os.execute().
+-- The poller runs as a background process (start /B on Windows) and writes
+-- artemis2_live.dat which the LuaTranslation scripts read every 3 seconds.
+--
+-- On deinitialize, the poller process is killed via taskkill (Windows) or
+-- pkill (Unix). The poller also handles SIGINT/Ctrl+C gracefully.
+
+local _pollerStarted = false
+
+asset.onInitialize(function()
+  local baseDir = openspace.absPath("${BASE}")
+  local isWindows = (package and package.config and package.config:sub(1,1) == "\\")
+    or (os.getenv("OS") or ""):find("Windows")
+
+  if isWindows then
+    local bat = baseDir .. "/tools/poller/start_poller.bat"
+    -- start /B runs the poller in background without blocking OpenSpace
+    os.execute('start /B cmd /c "' .. bat .. '"')
+  else
+    local sh = baseDir .. "/tools/poller/start_poller.sh"
+    os.execute(sh .. " &")
+  end
+
+  _pollerStarted = true
+  openspace.printInfo("Artemis 2 poller started")
+end)
+
+asset.onDeinitialize(function()
+  if not _pollerStarted then return end
+
+  local isWindows = (package and package.config and package.config:sub(1,1) == "\\")
+    or (os.getenv("OS") or ""):find("Windows")
+
+  if isWindows then
+    -- Kill python processes running the poller module
+    -- Use /F (force) and /FI to filter by window title or command line
+    -- taskkill with image name is safest -- targets only our poller
+    os.execute('taskkill /F /FI "WINDOWTITLE eq Artemis*" >nul 2>&1')
+    os.execute('taskkill /F /IM python.exe /FI "WINDOWTITLE eq *poller*" >nul 2>&1')
+    -- Fallback: kill any python running our specific module
+    os.execute([[powershell -Command "Get-Process python -ErrorAction SilentlyContinue | Where-Object {$_.CommandLine -like '*poller.poller*'} | Stop-Process -Force" >nul 2>&1]])
+  else
+    os.execute("pkill -f 'poller.poller' 2>/dev/null")
+  end
+
+  _pollerStarted = false
+  openspace.printInfo("Artemis 2 poller stopped")
+end)
+
+asset.meta = {
+  Name = "Artemis-2 Poller Launcher",
+  Description = "Auto-starts the Python data poller when the session begins and kills it on exit",
+  Author = "Custom",
+  URL = "",
+  License = "MIT license"
+}
