@@ -51,10 +51,16 @@ config/schema/sgct.schema.json
 settings.json
 openspace.cfg.override
 
+# GSD planning artifacts (not part of the OpenSpace distribution)
+.planning/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
 # Poller runtime artifacts (generated, not source)
 tools/poller/artemis2_live.dat
+tools/archive/
+tools/logs/
 tools/poller/archive/
 tools/poller/logs/
-tools/poller/__pycache__/
-tools/poller/sources/__pycache__/
-tools/poller/tests/__pycache__/
