@@ -1,0 +1,39 @@
+local earthTransforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+local Artemis2LiveTrail = {
+  Identifier = "Artemis2LiveTrail",
+  Parent = earthTransforms.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableTrailOrbit",
+    Translation = {
+      Type = "LuaTranslation",
+      Script = asset.resource("artemis2_live.lua")
+    },
+    Color = { 1.0, 0.2, 0.2 },
+    Period = 900,
+    Resolution = 128
+  },
+  GUI = {
+    Name = "Artemis-2 Live Trail",
+    Path = "/Solar System/Missions/Artemis/Trails",
+    Description = "Real-time trail from live AROW tracking data (~15 min window)"
+  }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Artemis2LiveTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Artemis2LiveTrail)
+end)
+
+asset.export(Artemis2LiveTrail)
+
+asset.meta = {
+  Name = "Artemis-2 Live Trail",
+  Description = "Trail showing real-time spacecraft position from AROW live data",
+  Author = "Custom",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

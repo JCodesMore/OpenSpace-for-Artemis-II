@@ -1,5 +1,6 @@
 local sun = asset.require("scene/solarsystem/sun/transforms")
 local transforms = asset.require("./transforms")
+local liveTransforms = asset.require("./transforms_live")
 
 local models = asset.resource({
   Name = "Artemis Models",
@@ -10,7 +11,7 @@ local models = asset.resource({
 
 local Artemis2Model = {
   Identifier = "Artemis2Model",
-  Parent = transforms.Artemis2Position.Identifier,
+  Parent = liveTransforms.Artemis2LivePosition.Identifier,
   ApproachFactor = 2700,
   Transform = {
     Rotation = {
