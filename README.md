@@ -13,6 +13,15 @@
   <img src="https://img.shields.io/badge/Built%20on-OpenSpace-blue?style=flat-square" alt="OpenSpace">
 </p>
 
+<p align="center">
+  <a href="https://youtu.be/Kp9ETVVISGc">
+    <img src="https://img.youtube.com/vi/Kp9ETVVISGc/maxresdefault.jpg" alt="Watch the demo" width="720">
+  </a>
+</p>
+<p align="center">
+  <em>Click the image above to watch the full demo on YouTube</em>
+</p>
+
 ---
 
 This is a custom fork of [OpenSpace](http://openspaceproject.com) purpose-built to visualize the **Artemis II mission** — the first crewed flight around the Moon since Apollo 17 in 1972. It pulls live spacecraft telemetry, renders a 3D Orion capsule with real-time orientation, and lets you fly alongside the crew from launch to splashdown.
