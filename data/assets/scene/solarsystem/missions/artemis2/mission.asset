@@ -1,52 +1,91 @@
 local Mission = {
   Identifier = "Artemis2",
   Name = "Artemis 2",
-  TimeRange = { Start = "2026 APR 01 22:24:00", End = "2026 APR 10 21:00:00" },
+  TimeRange = { Start = "2026 APR 01 22:24:00", End = "2026 APR 11 00:21:00" },
   Image = "https://data.openspaceproject.com/missions/artemis/em1_patch_final.png",
   Description = "The Artemis 2 mission is the first crewed flight of NASA's Orion spacecraft, sending four astronauts on a free-return trajectory around the Moon. Crew: Reid Wiseman (CDR), Victor Glover (Pilot), Christina Koch (MS1), Jeremy Hansen (MS2/CSA).",
+  Actions = {
+    "os.artemis2.SetupLaunch",
+    "os.artemis2.OverviewCam",
+    "os.artemis2.FollowCam",
+    "os.artemis2.CloseUpCam"
+  },
   Milestones = {
     {
-      Name = "Mission launch",
-      Date = "2026 APR 01 22:24:00",
-      Description = "Artemis 2 launches from KSC LC-39B on SLS Block 1 with crew."
+      Name = "Liftoff",
+      Date = "2026 APR 01 22:35:00",
+      Description = "SLS launches from KSC LC-39B with crew of four.",
+      Actions = { "os.artemis2.GoToLiftoff" }
     },
     {
-      Name = "ICPS separation",
-      Date = "2026 APR 01 22:32:30",
-      Description = "Interim Cryogenic Propulsion Stage separates after TLI burn."
+      Name = "ICPS separation and RPO",
+      Date = "2026 APR 02 01:59:00",
+      Description = "Orion separates from ICPS; proximity operations begin.",
+      Actions = { "os.artemis2.GoToICPSSep" }
     },
     {
       Name = "Trans-lunar injection",
-      Date = "2026 APR 02 02:00:00",
-      Description = "Orion begins its transit to the Moon."
+      Date = "2026 APR 03 00:12:00",
+      Description = "TLI burn commits Orion to lunar free-return trajectory.",
+      Actions = { "os.artemis2.GoToTLI" }
     },
     {
-      Name = "Lunar close approach",
-      Date = "2026 APR 07 12:00:00",
-      Description = "Orion reaches closest approach to the lunar far side, approximately 4,047 miles above the surface."
+      Name = "Enter lunar SOI",
+      Date = "2026 APR 06 05:34:00",
+      Description = "Moon's gravity becomes the dominant force on Orion.",
+      Actions = { "os.artemis2.GoToLunarSOI" }
+    },
+    {
+      Name = "Closest lunar approach",
+      Date = "2026 APR 06 23:58:00",
+      Description = "Orion reaches closest point to the Moon — ~4,600 miles above the far side.",
+      Actions = { "os.artemis2.GoToClosestApproach" }
+    },
+    {
+      Name = "Maximum distance from Earth",
+      Date = "2026 APR 07 00:01:00",
+      Description = "Orion reaches ~230,000-252,000 miles from Earth — farthest humans have traveled.",
+      Actions = { "os.artemis2.GoToMaxDistance" }
+    },
+    {
+      Name = "Exit lunar SOI",
+      Date = "2026 APR 07 18:22:00",
+      Description = "Orion returns to Earth gravity dominance for the trip home.",
+      Actions = { "os.artemis2.GoToExitLunarSOI" }
+    },
+    {
+      Name = "Entry interface",
+      Date = "2026 APR 11 00:08:00",
+      Description = "Orion reaches 400,000 ft altitude — peak heating during reentry.",
+      Actions = { "os.artemis2.GoToEntryInterface" }
     },
     {
       Name = "Splashdown",
-      Date = "2026 APR 10 18:00:00",
-      Description = "Orion splashes down in the Pacific Ocean off San Diego."
+      Date = "2026 APR 11 00:21:00",
+      Description = "Orion splashes down in the Pacific Ocean ~50 miles off San Diego.",
+      Actions = { "os.artemis2.GoToSplashdown" }
     }
   },
   Phases = {
     {
       Name = "Launch and ascent",
-      TimeRange = { Start = "2026 APR 01 22:24:00", End = "2026 APR 02 02:00:00" }
+      TimeRange = { Start = "2026 APR 01 22:24:00", End = "2026 APR 02 02:00:00" },
+      Actions = { "os.artemis2.GoToLiftoff", "os.artemis2.GoToICPSSep" }
     },
     {
       Name = "Outbound transit",
-      TimeRange = { Start = "2026 APR 02 02:00:00", End = "2026 APR 07 00:00:00" }
+      TimeRange = { Start = "2026 APR 02 02:00:00", End = "2026 APR 06 05:34:00" },
+      Actions = { "os.artemis2.GoToTLI", "os.artemis2.GoToLunarSOI" }
     },
     {
       Name = "Lunar flyby",
-      TimeRange = { Start = "2026 APR 07 00:00:00", End = "2026 APR 08 00:00:00" }
+      TimeRange = { Start = "2026 APR 06 05:34:00", End = "2026 APR 07 18:22:00" },
+      Actions = { "os.artemis2.GoToClosestApproach", "os.artemis2.GoToMaxDistance", "os.artemis2.GoToExitLunarSOI" }
     },
     {
-      Name = "Return transit",
-      TimeRange = { Start = "2026 APR 08 00:00:00", End = "2026 APR 10 18:00:00" }
+      Name = "Return and reentry",
+      TimeRange = { Start = "2026 APR 07 18:22:00", End = "2026 APR 11 00:21:00" },
+      Actions = { "os.artemis2.GoToEntryInterface", "os.artemis2.GoToSplashdown" }
     }
   }
 }
