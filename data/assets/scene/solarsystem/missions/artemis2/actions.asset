@@ -7,17 +7,196 @@ local SetupLaunch = {
   IsLocal = false
 }
 
+local GoToLiftoff = {
+  Identifier = "os.artemis2.GoToLiftoff",
+  Name = "Go to Liftoff",
+  Command = [[
+    openspace.time.setTime("2026-04-01T22:35:00.000")
+    openspace.navigation.setNavigationState({
+      Anchor = "Artemis2Model",
+      Position = { 0.0, 50000.0, 100000.0 },
+      ReferenceFrame = "Root",
+      Up = { 0.0, 1.0, 0.0 }
+    })
+  ]],
+  Documentation = "Jump to SLS liftoff from KSC LC-39B",
+  GuiPath = "/Artemis2/Events",
+  IsLocal = false
+}
+
+local GoToICPSSep = {
+  Identifier = "os.artemis2.GoToICPSSep",
+  Name = "Go to ICPS Separation",
+  Command = [[
+    openspace.time.setTime("2026-04-02T01:59:00.000")
+    openspace.navigation.setNavigationState({
+      Anchor = "Artemis2Model",
+      Position = { 0.0, 50000.0, 100000.0 },
+      ReferenceFrame = "Root",
+      Up = { 0.0, 1.0, 0.0 }
+    })
+  ]],
+  Documentation = "Jump to ICPS separation and proximity operations",
+  GuiPath = "/Artemis2/Events",
+  IsLocal = false
+}
+
+local GoToTLI = {
+  Identifier = "os.artemis2.GoToTLI",
+  Name = "Go to Trans-Lunar Injection",
+  Command = [[
+    openspace.time.setTime("2026-04-03T00:12:00.000")
+    openspace.navigation.setNavigationState({
+      Anchor = "Artemis2Model",
+      Position = { 0.0, 50000.0, 100000.0 },
+      ReferenceFrame = "Root",
+      Up = { 0.0, 1.0, 0.0 }
+    })
+  ]],
+  Documentation = "Jump to TLI burn — commits Orion to lunar trajectory",
+  GuiPath = "/Artemis2/Events",
+  IsLocal = false
+}
+
+local GoToLunarSOI = {
+  Identifier = "os.artemis2.GoToLunarSOI",
+  Name = "Go to Lunar SOI Entry",
+  Command = [[
+    openspace.time.setTime("2026-04-06T05:34:00.000")
+    openspace.navigation.setNavigationState({
+      Anchor = "Artemis2Model",
+      Position = { 0.0, 50000.0, 100000.0 },
+      ReferenceFrame = "Root",
+      Up = { 0.0, 1.0, 0.0 }
+    })
+  ]],
+  Documentation = "Jump to when Moon's gravity becomes dominant",
+  GuiPath = "/Artemis2/Events",
+  IsLocal = false
+}
+
+local GoToClosestApproach = {
+  Identifier = "os.artemis2.GoToClosestApproach",
+  Name = "Go to Closest Lunar Approach",
+  Command = [[
+    openspace.time.setTime("2026-04-06T23:58:00.000")
+    openspace.navigation.setNavigationState({
+      Anchor = "Artemis2Model",
+      Position = { 0.0, 50000.0, 100000.0 },
+      ReferenceFrame = "Root",
+      Up = { 0.0, 1.0, 0.0 }
+    })
+  ]],
+  Documentation = "Jump to closest approach — ~4,600 mi above lunar far side",
+  GuiPath = "/Artemis2/Events",
+  IsLocal = false
+}
+
+local GoToMaxDistance = {
+  Identifier = "os.artemis2.GoToMaxDistance",
+  Name = "Go to Max Distance from Earth",
+  Command = [[
+    openspace.time.setTime("2026-04-07T00:01:00.000")
+    openspace.navigation.setNavigationState({
+      Anchor = "Artemis2Model",
+      Position = { 0.0, 50000.0, 100000.0 },
+      ReferenceFrame = "Root",
+      Up = { 0.0, 1.0, 0.0 }
+    })
+  ]],
+  Documentation = "Jump to maximum distance from Earth (~230,000+ miles)",
+  GuiPath = "/Artemis2/Events",
+  IsLocal = false
+}
+
+local GoToExitLunarSOI = {
+  Identifier = "os.artemis2.GoToExitLunarSOI",
+  Name = "Go to Lunar SOI Exit",
+  Command = [[
+    openspace.time.setTime("2026-04-07T18:22:00.000")
+    openspace.navigation.setNavigationState({
+      Anchor = "Artemis2Model",
+      Position = { 0.0, 50000.0, 100000.0 },
+      ReferenceFrame = "Root",
+      Up = { 0.0, 1.0, 0.0 }
+    })
+  ]],
+  Documentation = "Jump to return to Earth gravity dominance",
+  GuiPath = "/Artemis2/Events",
+  IsLocal = false
+}
+
+local GoToEntryInterface = {
+  Identifier = "os.artemis2.GoToEntryInterface",
+  Name = "Go to Entry Interface",
+  Command = [[
+    openspace.time.setTime("2026-04-11T00:08:00.000")
+    openspace.navigation.setNavigationState({
+      Anchor = "Artemis2Model",
+      Position = { 0.0, 50000.0, 100000.0 },
+      ReferenceFrame = "Root",
+      Up = { 0.0, 1.0, 0.0 }
+    })
+  ]],
+  Documentation = "Jump to 400,000 ft altitude — peak heating begins",
+  GuiPath = "/Artemis2/Events",
+  IsLocal = false
+}
+
+local GoToSplashdown = {
+  Identifier = "os.artemis2.GoToSplashdown",
+  Name = "Go to Splashdown",
+  Command = [[
+    openspace.time.setTime("2026-04-11T00:21:00.000")
+    openspace.navigation.setNavigationState({
+      Anchor = "Artemis2Model",
+      Position = { 0.0, 50000.0, 100000.0 },
+      ReferenceFrame = "Root",
+      Up = { 0.0, 1.0, 0.0 }
+    })
+  ]],
+  Documentation = "Jump to Pacific Ocean splashdown off San Diego",
+  GuiPath = "/Artemis2/Events",
+  IsLocal = false
+}
+
 
 asset.onInitialize(function()
   openspace.action.registerAction(SetupLaunch)
+  openspace.action.registerAction(GoToLiftoff)
+  openspace.action.registerAction(GoToICPSSep)
+  openspace.action.registerAction(GoToTLI)
+  openspace.action.registerAction(GoToLunarSOI)
+  openspace.action.registerAction(GoToClosestApproach)
+  openspace.action.registerAction(GoToMaxDistance)
+  openspace.action.registerAction(GoToExitLunarSOI)
+  openspace.action.registerAction(GoToEntryInterface)
+  openspace.action.registerAction(GoToSplashdown)
 end)
 
 asset.onDeinitialize(function()
+  openspace.action.removeAction(GoToSplashdown)
+  openspace.action.removeAction(GoToEntryInterface)
+  openspace.action.removeAction(GoToExitLunarSOI)
+  openspace.action.removeAction(GoToMaxDistance)
+  openspace.action.removeAction(GoToClosestApproach)
+  openspace.action.removeAction(GoToLunarSOI)
+  openspace.action.removeAction(GoToTLI)
+  openspace.action.removeAction(GoToICPSSep)
+  openspace.action.removeAction(GoToLiftoff)
   openspace.action.removeAction(SetupLaunch)
 end)
 
 asset.export("SetupLaunch", SetupLaunch.Identifier)
-
+asset.export("GoToLiftoff", GoToLiftoff.Identifier)
+asset.export("GoToICPSSep", GoToICPSSep.Identifier)
+asset.export("GoToTLI", GoToTLI.Identifier)
+asset.export("GoToLunarSOI", GoToLunarSOI.Identifier)
+asset.export("GoToClosestApproach", GoToClosestApproach.Identifier)
+asset.export("GoToMaxDistance", GoToMaxDistance.Identifier)
+asset.export("GoToExitLunarSOI", GoToExitLunarSOI.Identifier)
+asset.export("GoToEntryInterface", GoToEntryInterface.Identifier)
+asset.export("GoToSplashdown", GoToSplashdown.Identifier)
 
 
 asset.meta = {
